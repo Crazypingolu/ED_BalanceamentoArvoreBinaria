@@ -1,9 +1,9 @@
-package modes.estrutura.arvore;
+package model.estrutura.arvore;
 
 import model.estrutura.arvore.No;
 import model.estrutura.lista.ListaEncadeadaSimples;
 
-public class ArvoreBinaria<T extends Comparable>{
+public class ArvoreBinaria<T extends Comparable> {
 	private No<T> raiz;
 	private int tamanho = 0;
 	
@@ -12,7 +12,9 @@ public class ArvoreBinaria<T extends Comparable>{
 	}
 	
 	// Add: adiciona um novo No<T> na arvore;
+	@SuppressWarnings("unchecked")
 	public void add(T valor){
+		No<T> novo = new No<T>(valor);
 		tamanho++;
 		if (raiz == null){
 			this.raiz = novo;
@@ -82,7 +84,7 @@ public class ArvoreBinaria<T extends Comparable>{
 	
 	// rotacaoEsquerda
 	public No<T> rotacaoEsquerda(No<T> atual){
-		No aux = atual.getMaior();
+		No<T> aux = atual.getMaior();
 		aux.setRaiz(atual.getRaiz());
 		// tratamento para quando a arvore é egenerada
 		if (aux.getMenor() != null)
@@ -125,7 +127,7 @@ public class ArvoreBinaria<T extends Comparable>{
 	}
 	
 	// rotacaDuplaDireita
-	public No rotacaoDuplaDireita(No<T> atual){
+	public No<T> rotacaoDuplaDireita(No<T> atual){
 		No<T> aux = atual.getMenor();
 		atual.setMenor(rotacaoEsquerda(aux));
 		No<T> aux2 = rotacaoDireita(atual);
@@ -133,7 +135,7 @@ public class ArvoreBinaria<T extends Comparable>{
 	}
 	
 	// rotacaDuplaEsquerda
-	public No rotacaoDuplaEsquerda(No<T> atual){
+	public No<T> rotacaoDuplaEsquerda(No<T> atual){
 		No<T> aux = atual.getMaior();
 		atual.setMaior(rotacaoDireita(aux));
 		No<T> aux2 = rotacaoEsquerda(atual);
@@ -145,22 +147,22 @@ public class ArvoreBinaria<T extends Comparable>{
 		this.raiz = balancear(this.raiz);
 	}
 	public No<T> balancear(No<T> atual){
-		if(atual.getBalanceamento() == 2 && atual.getNoEsq().getBalanceamento() >= 0){
+		if(atual.getBalanceamento() == 2 && atual.getMenor().getBalanceamento() >= 0){
 			atual = rotacaoDireita(atual);
-		} else if(atual.getBalanceamento() == -2 && atual.getNoDir().getBalanceamento() <= 0){
+		} else if(atual.getBalanceamento() == -2 && atual.getMaior().getBalanceamento() <= 0){
 			atual = rotacaoDuplaEsquerda(atual);
-		} else if(atual.getBalanceamento() == 2 && atual.getNoEsq().getBalanceamento() < 0) {
+		} else if(atual.getBalanceamento() == 2 && atual.getMenor().getBalanceamento() < 0) {
 			atual = rotacaoDuplaDireita(atual);
-		} else if(atual.getBalanceamento() == -2 && atual.getNoDir().getBalanceamento() > 0){
+		} else if(atual.getBalanceamento() == -2 && atual.getMaior().getBalanceamento() > 0){
 			atual = rotacaoDuplaEsquerda(atual);
 		}
 		
-		if(atual.getNoDir() != null){
-			balancear(atual.getNoDir());
+		if(atual.getMaior() != null){
+			balancear(atual.getMaior());
 		}
 		
-		if(atual.getNoEsq() != null){
-			balancear(atual.getNoEsq());
+		if(atual.getMenor() != null){
+			balancear(atual.getMenor());
 		}
 		
 		return atual;

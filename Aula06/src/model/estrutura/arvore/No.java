@@ -10,7 +10,7 @@ public class No<T> {
 		this.maior = null;
 		this.menor = null;
 		this.raiz = null;
-		this.balanceamento = o;
+		this.balanceamento = 0;
 		this.valor = valor;
 	}
 	
@@ -22,7 +22,7 @@ public class No<T> {
 		valor = newValor;
 	}
 	
-	public No<t> getMaior(){
+	public No<T> getMaior(){
 		return maior;
 	}
 	
@@ -30,7 +30,7 @@ public class No<T> {
 		maior = newMaior;
 	}
 	
-	public No<t> getMenor(){
+	public No<T> getMenor(){
 		return menor;
 	}
 
@@ -38,7 +38,7 @@ public class No<T> {
 		menor = newMenor;
 	}
 	
-	public No<t> getRaiz(){
+	public No<T> getRaiz(){
 		return raiz;
 	}
 	

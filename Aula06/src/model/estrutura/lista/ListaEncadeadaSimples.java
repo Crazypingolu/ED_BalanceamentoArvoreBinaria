@@ -1,7 +1,7 @@
 package model.estrutura.lista;
 
 import java.lang.Exception;
-import model.estrutura.No;
+import model.estrutura.lista.No;
 
 public class ListaEncadeadaSimples<T> {
 		private No<T> inicio = null;
